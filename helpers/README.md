@@ -2,6 +2,7 @@ ranger_librarian_helpers
 ------------
 
 This ROS package contains nodes/launchers helping to run ranger as library assistant.
+<img src="../docs/figures/interaction_modules_helpers.png" align="center" width="600">
 
 Dependencies
 ------------
@@ -32,11 +33,11 @@ roslaunch ranger_ros 3dsensor.launch
 
 After bringing the robot as described above, new 3D environment map can be created using launcher from this package:
 ```
-roslaunch ranger_librarian ranger_mapping.launch
+roslaunch ranger_librarian_helpers ranger_mapping.launch
 ```
 During the mapping robot can be teleoperated or moved by hands. New waypoints can be added using  [android application](https://github.com/DonatasKozlovskis/ranger_app) or computer keyboard after running:
 ```
-rosrun ranger_librarian keyboard_talker.py
+rosrun ranger_librarian_helpers keyboard_talker.py
 ```
 where buttons:
 - "a": allows to add new waypoint,
