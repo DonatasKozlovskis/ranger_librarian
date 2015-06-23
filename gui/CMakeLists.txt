@@ -33,7 +33,7 @@ find_package(catkin REQUIRED COMPONENTS
         rospy
         std_msgs
         sensor_msgs
-        ranger_librarian
+        ranger_librarian_helpers
         image_transport
         cv_bridge
 )

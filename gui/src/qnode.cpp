@@ -70,14 +70,14 @@ bool QNode::init() {
     nh_->param<string>("battery_level_topic", battery_level_topic, BATTERY_LEVEL_TOPIC);
 
 	// Add your ros communications here.
-    pub_navigator_ = nh_->advertise<ranger_librarian::NavigatorAction>("navigator_action", 10);
+    pub_navigator_ = nh_->advertise<ranger_librarian_helpers::NavigatorAction>("navigator_action", 10);
 
 
     // Subscribers
     sub_rgb_ =              it_->subscribe("/usb_cam/image_raw", 1, &QNode::rgb_callback, this);
     sub_depth_low_action_ = nh_->subscribe<const std_msgs::String&>(depth_low_action, 1, &QNode::depth_low_action_callback, this);
     sub_scale_  =           nh_->subscribe<const std_msgs::Float64&>(scale_topic, 1, &QNode::scale_callback, this);
-    sub_scale_filtered_ =   nh_->subscribe<const ranger_librarian::WeightFiltered&>(scale_filtered_topic, 1, &QNode::scale_filtered_callback, this);
+    sub_scale_filtered_ =   nh_->subscribe<const ranger_librarian_helpers::WeightFiltered&>(scale_filtered_topic, 1, &QNode::scale_filtered_callback, this);
     sub_battery_ =          nh_->subscribe<const std_msgs::Float64&>(battery_level_topic, 1, &QNode::battery_level_callback, this);
 
     // get the rest of paramters
@@ -98,7 +98,7 @@ bool QNode::init() {
 void QNode::run() {
 
     log("Started moving around");
-    update_navigator_action_(ranger_librarian::NavigatorAction::MOVE);
+    update_navigator_action_(ranger_librarian_helpers::NavigatorAction::MOVE);
 
     //the same as ros::spin();
     while (ros::ok()) {
@@ -172,7 +172,7 @@ void QNode::depth_low_action_callback(const std_msgs::String& msg) {
     if ( depth_low_action.compare("stop")==0 ) {
 
         read_label_ = true;
-        update_navigator_action_(ranger_librarian::NavigatorAction::STOP);
+        update_navigator_action_(ranger_librarian_helpers::NavigatorAction::STOP);
         log("Trying to read label...");
 
         if (book_read_label()) {
@@ -188,7 +188,7 @@ void QNode::depth_low_action_callback(const std_msgs::String& msg) {
             log("Read label failed! Timeout...");
         }
         read_label_ = false;
-        update_navigator_action_(ranger_librarian::NavigatorAction::MOVE);
+        update_navigator_action_(ranger_librarian_helpers::NavigatorAction::MOVE);
     }
 
 }
@@ -208,7 +208,7 @@ void QNode::scale_callback(const std_msgs::Float64& msg) {
             log("MAX WEIGHT reached! ");
             // sleep for couple of seconds
             ros::Duration(2).sleep();
-            update_navigator_action_(ranger_librarian::NavigatorAction::FINISH);
+            update_navigator_action_(ranger_librarian_helpers::NavigatorAction::FINISH);
         }
 
     }
@@ -220,13 +220,13 @@ void QNode::scale_callback(const std_msgs::Float64& msg) {
             log("Disloaded! Going to move around");
             // sleep for couple of seconds
             ros::Duration(2).sleep();
-            update_navigator_action_(ranger_librarian::NavigatorAction::MOVE);
+            update_navigator_action_(ranger_librarian_helpers::NavigatorAction::MOVE);
         }
     }
 }
 
 
-void QNode::scale_filtered_callback(const ranger_librarian::WeightFiltered& msg) {
+void QNode::scale_filtered_callback(const ranger_librarian_helpers::WeightFiltered& msg) {
 
 
     double weight_stable = msg.weight_stable;
@@ -263,7 +263,7 @@ void QNode::battery_level_callback(const std_msgs::Float64& msg) {
         if (level_current < battery_level_min_) {
             battery_low_reached_ = true;
             log("Battery level low! ");
-            update_navigator_action_(ranger_librarian::NavigatorAction::FINISH);
+            update_navigator_action_(ranger_librarian_helpers::NavigatorAction::FINISH);
         }
     }
 
@@ -274,7 +274,7 @@ void QNode::battery_level_callback(const std_msgs::Float64& msg) {
             log("Battery charged! Going to move around");
             // sleep for couple of seconds
             ros::Duration(2).sleep();
-            update_navigator_action_(ranger_librarian::NavigatorAction::MOVE);
+            update_navigator_action_(ranger_librarian_helpers::NavigatorAction::MOVE);
         }
     }
 }

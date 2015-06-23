@@ -23,8 +23,8 @@
 #include <std_msgs/Float64.h>
 #include <std_msgs/UInt8.h>
 #include <std_msgs/String.h>
-#include <ranger_librarian/WeightFiltered.h>
-#include <ranger_librarian/NavigatorAction.h>
+#include <ranger_librarian_helpers/WeightFiltered.h>
+#include <ranger_librarian_helpers/NavigatorAction.h>
 //CV bridge
 #include <image_transport/image_transport.h>
 #include <cv_bridge/cv_bridge.h>
@@ -151,8 +151,8 @@ private:
     Book last_book_add_;
     ros::Time last_book_add_time_;
 
-    ranger_librarian::NavigatorAction action_msg_last_;
-    ranger_librarian::NavigatorAction action_msg_current_;
+    ranger_librarian_helpers::NavigatorAction action_msg_last_;
+    ranger_librarian_helpers::NavigatorAction action_msg_current_;
 
     // list of books
     std::vector<Book> book_list_;
@@ -166,7 +166,7 @@ private:
     void rgb_callback(const sensor_msgs::ImageConstPtr& msg);
     void depth_low_action_callback(const std_msgs::String& msg);
     void scale_callback(const std_msgs::Float64& msg);
-    void scale_filtered_callback(const ranger_librarian::WeightFiltered& msg);
+    void scale_filtered_callback(const ranger_librarian_helpers::WeightFiltered& msg);
     void battery_level_callback(const std_msgs::Float64& msg);
 
 public:
