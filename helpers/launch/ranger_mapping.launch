@@ -17,10 +17,10 @@
 
 	
 	<!-- include map control to add waypoints-->
-	<include file="$(find ranger_librarian)/launch/include/map_control.launch"/>
+	<include file="$(find ranger_librarian_helpers)/launch/include/map_control.launch"/>
 	
 	<!-- Mapping -->
-	<include file="$(find ranger_librarian)/launch/rtab_slam.launch">
+	<include file="$(find ranger_librarian_helpers)/launch/rtab_slam.launch">
 		<arg name="rtabmapviz" default="true" /> 
 	</include>
 	

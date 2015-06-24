@@ -5,7 +5,7 @@
 #include <sensor_msgs/image_encodings.h>
 
 #include <actionlib/server/simple_action_server.h>
-#include "ranger_librarian/LabelReadingAction.h"
+#include "ranger_librarian_helpers/LabelReadingAction.h"
 
 //CV bridge
 #include <image_transport/image_transport.h>
@@ -26,11 +26,11 @@ class LabelReadingAction
 protected:
 
     ros::NodeHandle nh_;
-    actionlib::SimpleActionServer<ranger_librarian::LabelReadingAction> as_;
+    actionlib::SimpleActionServer<ranger_librarian_helpers::LabelReadingAction> as_;
     string action_name_;
 
-    ranger_librarian::LabelReadingFeedback feedback_;
-    ranger_librarian::LabelReadingResult result_;
+    ranger_librarian_helpers::LabelReadingFeedback feedback_;
+    ranger_librarian_helpers::LabelReadingResult result_;
 
     ros::Subscriber sub_;
 

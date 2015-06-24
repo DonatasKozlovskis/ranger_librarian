@@ -138,8 +138,16 @@ class Mapper():
         self.save_waypoints();
         rospy.loginfo("Saving map...");
         self.save_map();
-        rospy.loginfo("And switching to localisation mode");
+        rospy.loginfo("Switching to localisation mode");
         self.switch_mode();
+        rospy.loginfo("And saving rtabmap database");
+        # give rtab a chance to save db
+        rospy.sleep(3)
+        #copy db rtabmap db
+        rtab_db_name = os.path.join(self.path_wp, "rtabmap.db")
+        rtab_db_name_stamped = os.path.join(self.path_wp, "rtabmap_" + str(self.start_time) + ".db")
+        #copy db
+        shutil.copy(rtab_db_name, rtab_db_name_stamped)
 
     #==========================================================================
     def control_callback(self, msg):
@@ -373,12 +381,6 @@ if __name__=="__main__":
     finally:
         rospy.loginfo("Mapper Finished")
         
-        #copy db rtabmap db
-        rtab_db_name_stamped = mapper.path_map + "/rtabmap_" + str(mapper.start_time) + ".db";
-        # give rtab a chance to save db
-        rospy.sleep(3)
-        #copy db
-        shutil.copy(mapper.path_map + "/rtabmap.db", rtab_db_name_stamped)
         sys.exit(sts)
 
 

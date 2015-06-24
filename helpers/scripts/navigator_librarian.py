@@ -22,7 +22,7 @@ from visualization_msgs.msg import Marker
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String
 from std_srvs.srv import Empty
-from ranger_librarian.msg import NavigatorAction
+from ranger_librarian_helpers.msg import NavigatorAction
 
 
 ###############################################

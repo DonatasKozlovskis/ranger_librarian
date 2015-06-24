@@ -6,7 +6,7 @@
 #include <std_msgs/Float64.h>
 #include <std_msgs/UInt8.h>
 // custom message
-#include <ranger_librarian/WeightFiltered.h>
+#include <ranger_librarian_helpers/WeightFiltered.h>
 
 //other
 #include <boost/circular_buffer.hpp>            // circular queue
@@ -77,7 +77,7 @@ WeightChangeMonitor::WeightChangeMonitor() :
     sub_scale_  = nh_.subscribe<const std_msgs::Float64&>(scale_topic, 1, &WeightChangeMonitor::scale_callback, this);
 
     // Publisher
-    pub_scale_filtered_ =   nh_.advertise<ranger_librarian::WeightFiltered>("scale_filtered", 2);
+    pub_scale_filtered_ =   nh_.advertise<ranger_librarian_helpers::WeightFiltered>("scale_filtered", 2);
 
 
     // set circular buffer capacity
@@ -137,7 +137,7 @@ void WeightChangeMonitor::scale_callback(const std_msgs::Float64& msg) {
 
 
     // create message
-    ranger_librarian::WeightFiltered weight_msg;
+    ranger_librarian_helpers::WeightFiltered weight_msg;
 
     // assign data
     weight_msg.change_time = change_time_;

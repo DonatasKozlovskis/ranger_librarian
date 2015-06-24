@@ -14,7 +14,7 @@
 	   Mapping:
 	   $ roslaunch rtabmap_ros demo_mapping.launch
 	-->
-	<arg name="path_map"  		default="$(find ranger_librarian)/maps"/>
+	<arg name="path_map"  		default="$(find ranger_librarian_helpers)/maps"/>
 	<arg name="database_path"     default="$(arg path_map)/rtabmap.db"/>
 	<arg name="localization"      default="false"/>
 	<arg name="args"              default="--delete_db_on_start"/>
@@ -23,7 +23,7 @@
     <arg name="rtabmapviz" default="true" /> 
 
 	<!-- Navigation stuff (move_base) -->
-	<include file="$(find ranger_librarian)/launch/include/move_base.launch"/>
+	<include file="$(find ranger_librarian_helpers)/launch/include/move_base.launch"/>
 		
 	<!-- Mapping -->
 	<group ns="rtabmap">
