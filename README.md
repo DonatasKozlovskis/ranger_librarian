@@ -34,7 +34,8 @@ Make sure you have an usb camera for label reading started with
 ```
 rosrun usb_cam usb_cam_node _video_device:="/dev/videoX"
 ```
-where `videoX` is your video device, e.g. `video0, video1, etc.`.
+from [`usb_cam` ROS package](http://wiki.ros.org/usb_cam),
+where videoX is your video device, e.g. `video0`, `video1`, etc..
 
 Then start the control with GUI:
 ```
