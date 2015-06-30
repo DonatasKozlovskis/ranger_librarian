@@ -7,8 +7,8 @@ This ROS package contains nodes/launchers helping to run ranger as library assis
 Dependencies
 ------------
 
-- [ranger_ros](https://github.com/chili-epfl/ranger_ros) (branch - ranger_librarian) for running robot wheels and getting sensor data.
-- [ranger_description](https://github.com/chili-epfl/ranger_description) (branch - ranger_librarian)  for getting robot description model in RVIZ.
+- [ranger_ros](https://github.com/chili-epfl/ranger_ros) for running robot wheels and getting sensor data.
+- [ranger_description](https://github.com/chili-epfl/ranger_description) for getting robot description model in RVIZ.
 
 ## Usage
 
